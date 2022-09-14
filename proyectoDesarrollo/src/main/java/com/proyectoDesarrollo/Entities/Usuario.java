@@ -8,23 +8,28 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private int id;
     @Column(name="email")
     private String email;
     @Column(name = "rol")
-    private String rol;
+    //private String rol;
+    private Enum_RoleName rol;
     @Transient
     private Profile perfil;
+    //@OneToMany
+    //@JoinColumn(name = "empresa")
     @Transient
     private Empresa empresa;
-    @Transient
+    //@Transient
+    @ManyToOne
+    @JoinColumn(name = "transaccion")
     private MovimientoDinero[] transaccion; //en forma de array
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -44,11 +49,11 @@ public class Usuario {
         this.perfil = perfil;
     }
 
-    public String getRol() {
+    public Enum_RoleName getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Enum_RoleName rol) {
         this.rol = rol;
     }
 

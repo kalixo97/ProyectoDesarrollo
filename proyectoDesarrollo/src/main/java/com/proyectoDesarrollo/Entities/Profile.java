@@ -1,11 +1,21 @@
 package com.proyectoDesarrollo.Entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Perfil")
 public class Profile {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    private String image;
-    private String phone;
+    @Column(name = "imagen")
+    private String imagen;
+    @Column(name = "telefono")
+    private String telefono;
 
+    @OneToOne
+    @JoinColumn(name = "usuario")
     private Usuario usuario;
 
     public String getId() {
@@ -16,20 +26,20 @@ public class Profile {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelefono(String phone) {
+        this.telefono = phone;
     }
 
     public Usuario getUsuario() {

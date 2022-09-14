@@ -1,6 +1,7 @@
 package com.proyectoDesarrollo.Services;
 
-import com.proyectoDesarrollo.Entities.Usuario;
+import com.proyectoDesarrollo.Entities.Empresa;
+import com.proyectoDesarrollo.Repository.IEmpresaRepository;
 import com.proyectoDesarrollo.Repository.IUsuarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -8,26 +9,25 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
-public class ServiceUsuario {
+public class ServiceEmpresa {
+    private IEmpresaRepository empresaRepository;
 
-    private IUsuarioRepository userRepository;
-
-    public ServiceUsuario(IUsuarioRepository rep){
-        this.userRepository = rep;
+    public ServiceEmpresa(IEmpresaRepository rep){
+        this.empresaRepository = rep;
     }
 
     //GET con POSTMAN
-    public ArrayList<Usuario> selectAll(){
-        return (ArrayList<Usuario>) this.userRepository.findAll();
+    public ArrayList<Empresa> selectAll(){
+        return (ArrayList<Empresa>) this.empresaRepository.findAll();
     }
 
 
     //Metodo que recibe un parametro de tipo Usuario y devolverá una Response
     //POST con POSTMAN
-    public Response createUser(Usuario user){
+    public Response createEmpresa(Empresa empresa){
         Response response = new Response();
         //Se va al repositorio para hacer uso del metodo existente save
-        this.userRepository.save(user);
+        this.empresaRepository.save(empresa);
         //Configura el code con 200
         response.setCode(200);
         //Configura el mensaje de la respuesta.
@@ -35,8 +35,8 @@ public class ServiceUsuario {
         return response;
     }
 
-    public Usuario selectById(int Id){
-        Optional<Usuario> existe = this.userRepository.findById(Id);
+    public Empresa selectEmpresatById(int Id){
+        Optional<Empresa> existe = this.empresaRepository.findById(Id);
         if(existe.isPresent()){
             return existe.get();
         }
@@ -44,8 +44,8 @@ public class ServiceUsuario {
 
     }
 
-    public Response deleteUserById(int id){
-        this.userRepository.deleteById(id);
+    public Response deleteEmpresaById(int id){
+        this.empresaRepository.deleteById(id);
         Response response = new Response();
         response.setCode(200);
         response.setMessage("El ususario ha sido eliminado exitosamente");
@@ -54,7 +54,7 @@ public class ServiceUsuario {
     }
 
     //public Response updateUsuario(int id){
-    public Response updateUsuario(Usuario dato){
+    public Response updateEmpresa(Empresa dato){
 
         //Usuario dato =new Usuario();
 
@@ -67,20 +67,19 @@ public class ServiceUsuario {
             return response;
         }
 
-        Usuario existe = selectById(dato.getId());
+        Empresa existe = selectEmpresatById(dato.getId());
         if(existe == null){
             response.setCode(500);
             response.setMessage("Error, el usuario no existe en la base de datos");
             return response;
         }
 
-        existe.setEmail(dato.getEmail());
-        this.userRepository.save(existe);
+        existe.setNombre(dato.getNombre());
+        this.empresaRepository.save(existe);
         response.setCode(200);
         response.setMessage("Usuario modificado exitosamente");
 
         return response;
     }
-
 
 }

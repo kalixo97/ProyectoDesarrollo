@@ -1,56 +1,70 @@
 package com.proyectoDesarrollo.Entities;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "empresa")
 public class Empresa {
 
-    private long id;
-    private String name;
-    private String document;
-    private String phone;
-    private String address;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "documento")
+    private String documento;
+    @Column(name = "telefono")
+    private String telefono;
+    @Column(name = "direccion")
+    private String direccion;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario")
     private Usuario[] usuario;              //array
+    //@ManyToOne
+    //@JoinColumn(name = "transaccion")
+    @Transient
     private MovimientoDinero[] transaccion; //array
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getDocument() {
-        return document;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelefono(String phone) {
+        this.telefono = telefono;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public Usuario[] getUsuario() {

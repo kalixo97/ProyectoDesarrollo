@@ -1,13 +1,27 @@
 package com.proyectoDesarrollo.Entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "movimientoDinero")
 public class MovimientoDinero {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String concept;
-    private float amount;
+    @Column(name = "concepto")
+    private String concepto;
+    @Column(name = "monto")
+    private float monto;
 
-    private Usuario usuario;
-    private Empresa empresa;
+    //@OneToMany
+    //@JoinColumn(name = "usuario")
+    //private Usuario usuario;
+
+
+    //@OneToMany
+    //@JoinColumn(name = "empresa")
+    //private Empresa empresa;
 
     public long getId() {
         return id;
@@ -17,23 +31,23 @@ public class MovimientoDinero {
         this.id = id;
     }
 
-    public String getConcept() {
-        return concept;
+    public String getConcepto() {
+        return concepto;
     }
 
-    public void setConcept(String concept) {
-        this.concept = concept;
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
     }
 
-    public float getAmount() {
-        return amount;
+    public float getMonto() {
+        return monto;
     }
 
-    public void setAmount(float amount) {
-        this.amount = amount;
+    public void setMonto(float monto) {
+        this.monto = monto;
     }
 
-    public Usuario getUsuario() {
+    /*public Usuario getUsuario() {
         return usuario;
     }
 
@@ -47,5 +61,5 @@ public class MovimientoDinero {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
-    }
+    }*/
 }

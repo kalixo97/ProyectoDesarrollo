@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+//@RequestMapping("index")
 public class ControlUsuario {
 
     private ServiceUsuario userServicio;
@@ -24,8 +25,9 @@ public class ControlUsuario {
         return "Pagina de inicio";
     }
 
-    @RequestMapping("/getusuarios")
+    @RequestMapping("users")
     public ArrayList<Usuario> getUsuarios(){
+
         return this.userServicio.selectAll();
     }
 
@@ -34,10 +36,38 @@ public class ControlUsuario {
     // Metodo recibe Usuario para dar la respuesta a traves del metodo de crear Usuario
     // del Servicio.
     // EL RequestBody identifica que lo que ingresa al controlador está en formato json
-    @PostMapping("create")
+    @PostMapping("users")
     public Response createUser(@RequestBody Usuario request){
 
         return this.userServicio.createUser(request);
 
     }
+
+    //ruta relativa
+    @RequestMapping("user/{id}")
+    public Usuario getUsuarioById(@PathVariable int id){
+
+        return this.userServicio.selectById(id);
+    }
+
+    @DeleteMapping("user/{id}")
+    public Response deleteUsuario(@PathVariable int id){
+        return this.userServicio.deleteUserById(id);
+    }
+
+    //HASTA ACA SE TIENE QUE ENVIAR UN ID EN EL POSRTMAN
+    @PatchMapping("user")
+    public Response updateUsuario(@RequestBody Usuario request){
+
+        return this.userServicio.updateUsuario(request);
+
+    }
+
+    /*@PatchMapping("user/{id}")
+    public Response updateUsuarioById(@PathVariable int id){
+
+        return this.userServicio.updateUsuario(request);
+
+    }*/
+
 }
