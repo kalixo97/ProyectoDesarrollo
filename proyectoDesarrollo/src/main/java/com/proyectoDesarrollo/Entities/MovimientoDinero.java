@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "movimientoDinero")
 public class MovimientoDinero {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,8 +19,6 @@ public class MovimientoDinero {
     //@JoinColumn(name = "usuario")
     //private Usuario usuario;
 
-
-
     //Las dos lineas de abajo, funcionaban segun el video
     //    @ManyToOne(cascade = CascadeType.ALL)
     //    @JoinColumn(name = "empresa_id", referenceColumnName = "id")
@@ -30,6 +27,8 @@ public class MovimientoDinero {
     @JoinColumn(name = "empresa_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)  // clave al momento de visualizar
     private Empresa empresa;
+
+    public MovimientoDinero(){}
 
     public long getId() {
         return id;

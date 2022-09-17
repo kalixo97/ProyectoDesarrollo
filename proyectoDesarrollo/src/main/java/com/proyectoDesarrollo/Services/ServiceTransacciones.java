@@ -7,11 +7,14 @@ import com.proyectoDesarrollo.Repository.ITransaccionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class ServiceTransacciones {
 
     private ITransaccionRepository tranRepository;
+    private IEmpresaRepository empresaRepository;
+
 
     public ServiceTransacciones(ITransaccionRepository rep){
         this.tranRepository = rep;
@@ -31,5 +34,17 @@ public class ServiceTransacciones {
         return response;
     }
 
+    public MovimientoDinero selectTranById(long Id){
+        Optional<MovimientoDinero> existe = this.tranRepository.findById(Id);
+        if(existe.isPresent()){
+            return existe.get();
+        }
+        else{return null;}
 
+    }
+
+    public ArrayList<MovimientoDinero> selectTranByEmpId(int id) {
+
+        return this.tranRepository.findbyEmpresaID(id);
+    }
 }

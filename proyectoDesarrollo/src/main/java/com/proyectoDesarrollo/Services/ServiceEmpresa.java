@@ -1,6 +1,7 @@
 package com.proyectoDesarrollo.Services;
 
 import com.proyectoDesarrollo.Entities.Empresa;
+import com.proyectoDesarrollo.Entities.MovimientoDinero;
 import com.proyectoDesarrollo.Repository.IEmpresaRepository;
 import com.proyectoDesarrollo.Repository.IUsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,6 @@ public class ServiceEmpresa {
     public ArrayList<Empresa> selectAll(){
         return (ArrayList<Empresa>) this.empresaRepository.findAll();
     }
-
 
     //Metodo que recibe un parametro de tipo Usuario y devolverá una Response
     //POST con POSTMAN
@@ -80,6 +80,16 @@ public class ServiceEmpresa {
         response.setMessage("Usuario modificado exitosamente");
 
         return response;
+    }
+
+    public ArrayList<String> NombreById(int id){
+
+        return this.empresaRepository.findNombyEmpresaID(id);
+    }
+
+    public ArrayList<MovimientoDinero> MovById(int id){
+
+        return this.empresaRepository.findMovbyEmpresaID(id);
     }
 
 }

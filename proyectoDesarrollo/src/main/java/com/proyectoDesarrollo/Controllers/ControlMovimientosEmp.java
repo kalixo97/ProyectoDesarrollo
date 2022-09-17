@@ -1,5 +1,6 @@
 package com.proyectoDesarrollo.Controllers;
 
+import com.proyectoDesarrollo.Entities.Empresa;
 import com.proyectoDesarrollo.Entities.MovimientoDinero;
 import com.proyectoDesarrollo.Entities.Usuario;
 import com.proyectoDesarrollo.Services.Response;
@@ -39,9 +40,34 @@ public class ControlMovimientosEmp {
 
     }
 
+    /*@GetMapping("enterprises/{id}/movements")
+    public ArrayList<MovimientoDinero> getTranById(@PathVariable int id){
 
-    //@GetMapping("enterprises/{id}/movements")
+        Empresa empresa = new Empresa();
+        empresa= this.serviceEmpresa.selectEmpresatById(id);
+
+        return this.servMovEmp.selectTranByEmpId(empresa.getId());
+    }*/
+
+    @GetMapping("enterprisesmov/{id}")
+    public ArrayList<MovimientoDinero> getTranById(@PathVariable int id){
 
 
+        return this.servMovEmp.selectTranByEmpId(id);
+    }
+
+    @GetMapping("enterprisesnom/{id}")
+    public ArrayList<String> getNombreById(@PathVariable int id){
+
+
+        return this.serviceEmpresa.NombreById(id);
+    }
+
+    @GetMapping("enterprises/{id}/movements")
+
+    public ArrayList<MovimientoDinero> getMovById(@PathVariable int id){
+
+        return this.serviceEmpresa.MovById(id);
+    }
 
 }

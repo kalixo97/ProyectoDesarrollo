@@ -22,8 +22,6 @@ public class Empresa {
     private String direccion;
 
     @Transient
-    //@ManyToOne
-    //@JoinColumn(name = "usuario")
     private List<Usuario> usuario;              //array
 
     //@JsonIgnore
@@ -37,6 +35,7 @@ public class Empresa {
     private Set<MovimientoDinero> transaccion = new HashSet<>();
     //private List<MovimientoDinero> transaccion = new ArrayList<>();
 
+    public Empresa(){}
 
     public int getId() {
         return id;
