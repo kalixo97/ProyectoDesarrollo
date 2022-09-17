@@ -1,5 +1,7 @@
 package com.proyectoDesarrollo.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,9 +21,15 @@ public class MovimientoDinero {
     //private Usuario usuario;
 
 
-    //@OneToMany
-    //@JoinColumn(name = "empresa")
-    //private Empresa empresa;
+
+    //Las dos lineas de abajo, funcionaban segun el video
+    //    @ManyToOne(cascade = CascadeType.ALL)
+    //    @JoinColumn(name = "empresa_id", referenceColumnName = "id")
+    //@OneToMany(mappedBy = "transaccion")
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)  // clave al momento de visualizar
+    private Empresa empresa;
 
     public long getId() {
         return id;
@@ -53,7 +61,7 @@ public class MovimientoDinero {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
+    }*/
 
     public Empresa getEmpresa() {
         return empresa;
@@ -61,5 +69,5 @@ public class MovimientoDinero {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
-    }*/
+    }
 }

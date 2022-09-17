@@ -1,6 +1,9 @@
 package com.proyectoDesarrollo.Entities;
 
+import net.bytebuddy.agent.builder.AgentBuilder;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="usuarios")
@@ -9,21 +12,25 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    @Column(name="email")
+    @Column(name="email", unique = true)
     private String email;
     @Column(name = "rol")
     //private String rol;
     private Enum_RoleName rol;
-    @Transient
-    private Profile perfil;
+    @OneToOne
+    @JoinColumn(name = "perfilUser")
+    private PerfilUsuario perfil;
     //@OneToMany
     //@JoinColumn(name = "empresa")
     @Transient
     private Empresa empresa;
-    //@Transient
-    @ManyToOne
-    @JoinColumn(name = "transaccion")
-    private MovimientoDinero[] transaccion; //en forma de array
+    @Transient
+    //@ManyToOne
+    //@JoinColumn(name = "transaccion")
+
+    private List<MovimientoDinero> transaccion; //en forma de array
+
+    public Usuario(){}
 
     public int getId() {
         return id;
@@ -41,11 +48,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public Profile getPerfil() {
+    public PerfilUsuario getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(Profile perfil) {
+    public void setPerfil(PerfilUsuario perfil) {
         this.perfil = perfil;
     }
 
@@ -65,11 +72,11 @@ public class Usuario {
         this.empresa = empresa;
     }
 
-    public MovimientoDinero[] getTransaccion() {
+    public List<MovimientoDinero> getTransaccion() {
         return transaccion;
     }
 
-    public void setTransaccion(MovimientoDinero[] transaccion) {
+    public void setTransaccion(List<MovimientoDinero> transaccion) {
         this.transaccion = transaccion;
     }
 }

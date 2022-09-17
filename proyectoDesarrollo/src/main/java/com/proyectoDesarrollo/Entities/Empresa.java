@@ -1,6 +1,9 @@
 package com.proyectoDesarrollo.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "empresa")
@@ -18,13 +21,21 @@ public class Empresa {
     @Column(name = "direccion")
     private String direccion;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario")
-    private Usuario[] usuario;              //array
-    //@ManyToOne
-    //@JoinColumn(name = "transaccion")
     @Transient
-    private MovimientoDinero[] transaccion; //array
+    //@ManyToOne
+    //@JoinColumn(name = "usuario")
+    private List<Usuario> usuario;              //array
+
+    //@JsonIgnore
+    //Esta funcionaba segun el video
+    //@OneToMany(mappedBy = "empresa")
+
+    //@ManyToOne(cascade =CascadeType.ALL)
+    //@JoinColumn(name = "transaccion_id", referencedColumnName = "id")
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private Set<MovimientoDinero> transaccion = new HashSet<>();
+    //private List<MovimientoDinero> transaccion = new ArrayList<>();
 
 
     public int getId() {
@@ -67,19 +78,19 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public Usuario[] getUsuario() {
+    public List<Usuario> getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario[] usuario) {
+    public void setUsuario(List<Usuario> usuario) {
         this.usuario = usuario;
     }
 
-    public MovimientoDinero[] getTransaccion() {
+    public Set<MovimientoDinero> getTransaccion() {
         return transaccion;
     }
 
-    public void setTransaccion(MovimientoDinero[] transaccion) {
+    public void setTransaccion(Set<MovimientoDinero> transaccion) {
         this.transaccion = transaccion;
     }
 }

@@ -4,25 +4,29 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Perfil")
-public class Profile {
+public class PerfilUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
     @Column(name = "imagen")
     private String imagen;
     @Column(name = "telefono")
     private String telefono;
 
-    @OneToOne
-    @JoinColumn(name = "usuario")
+    //@OneToOne
+    //@JoinColumn(name = "usuario")
+    @Transient
     private Usuario usuario;
 
-    public String getId() {
+    public PerfilUsuario(){
+
+    }
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,4 +53,7 @@ public class Profile {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
+
 }
