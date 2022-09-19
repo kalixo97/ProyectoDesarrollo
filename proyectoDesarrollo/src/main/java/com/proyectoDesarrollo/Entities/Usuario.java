@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 @Table(name="usuarios")
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
@@ -20,16 +19,14 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "perfilUser")
     private PerfilUsuario perfil;
-    //@OneToMany
-    //@JoinColumn(name = "empresa")
+    @Transient
+    private List<MovimientoDinero> transaccion; //en forma de array
     @Transient
     private Empresa empresa;
-    @Transient
+    //@OneToMany
+    //@JoinColumn(name = "empresa")
     //@ManyToOne
     //@JoinColumn(name = "transaccion")
-
-    private List<MovimientoDinero> transaccion; //en forma de array
-
     public Usuario(){}
 
     public int getId() {

@@ -15,4 +15,6 @@ public interface IEmpresaRepository extends JpaRepository<Empresa,Integer> {
 
     @Query("SELECT t.transaccion FROM Empresa t WHERE t.id = ?1")
     ArrayList<MovimientoDinero> findMovbyEmpresaID(int id);
+
+
 }

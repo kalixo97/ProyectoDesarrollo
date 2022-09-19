@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-//@RequestMapping("index")
 public class ControlUsuario {
 
     private ServiceUsuario userServicio;
@@ -56,18 +55,22 @@ public class ControlUsuario {
     }
 
     //HASTA ACA SE TIENE QUE ENVIAR UN ID EN EL POSRTMAN
-    @PatchMapping("user")
-    public Response updateUsuario(@RequestBody Usuario request){
+    //@PatchMapping("users")
+    //public Response updateUsuario(@RequestBody Usuario request){
 
-        return this.userServicio.updateUsuario(request);
+     //   return this.userServicio.updateUsuarioById(request);
+
+    //}
+
+
+
+    @PatchMapping("user/{id}")
+    public Response updateUsuarioById(@PathVariable int id, @RequestBody Usuario request){
+
+
+
+        return this.userServicio.updateUsuarioById(id, request);
 
     }
-
-    /*@PatchMapping("user/{id}")
-    public Response updateUsuarioById(@PathVariable int id){
-
-        return this.userServicio.updateUsuario(request);
-
-    }*/
 
 }

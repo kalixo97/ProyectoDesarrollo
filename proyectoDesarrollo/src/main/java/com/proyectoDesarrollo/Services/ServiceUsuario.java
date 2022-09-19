@@ -54,26 +54,20 @@ public class ServiceUsuario {
     }
 
     //public Response updateUsuario(int id){
-    public Response updateUsuario(Usuario dato){
-
-        //Usuario dato =new Usuario();
-
+    public Response updateUsuarioById(int id, Usuario dato){
 
         Response response = new Response();
-
-        if(dato.getId() == 0){
+        if(id<=0){
             response.setCode(500);
             response.setMessage("Error, el Id del usuario no es valido");
             return response;
         }
-
-        Usuario existe = selectById(dato.getId());
+        Usuario existe = selectById(id);
         if(existe == null){
             response.setCode(500);
             response.setMessage("Error, el usuario no existe en la base de datos");
             return response;
         }
-
         existe.setEmail(dato.getEmail());
         this.userRepository.save(existe);
         response.setCode(200);

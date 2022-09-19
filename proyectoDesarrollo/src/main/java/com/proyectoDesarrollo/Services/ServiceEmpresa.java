@@ -2,6 +2,7 @@ package com.proyectoDesarrollo.Services;
 
 import com.proyectoDesarrollo.Entities.Empresa;
 import com.proyectoDesarrollo.Entities.MovimientoDinero;
+import com.proyectoDesarrollo.Entities.Usuario;
 import com.proyectoDesarrollo.Repository.IEmpresaRepository;
 import com.proyectoDesarrollo.Repository.IUsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -54,33 +55,6 @@ public class ServiceEmpresa {
     }
 
     //public Response updateUsuario(int id){
-    public Response updateEmpresa(Empresa dato){
-
-        //Usuario dato =new Usuario();
-
-
-        Response response = new Response();
-
-        if(dato.getId() == 0){
-            response.setCode(500);
-            response.setMessage("Error, el Id del usuario no es valido");
-            return response;
-        }
-
-        Empresa existe = selectEmpresatById(dato.getId());
-        if(existe == null){
-            response.setCode(500);
-            response.setMessage("Error, el usuario no existe en la base de datos");
-            return response;
-        }
-
-        existe.setNombre(dato.getNombre());
-        this.empresaRepository.save(existe);
-        response.setCode(200);
-        response.setMessage("Usuario modificado exitosamente");
-
-        return response;
-    }
 
     public ArrayList<String> NombreById(int id){
 
@@ -90,6 +64,29 @@ public class ServiceEmpresa {
     public ArrayList<MovimientoDinero> MovById(int id){
 
         return this.empresaRepository.findMovbyEmpresaID(id);
+    }
+
+    public Response updateEmpresaById(int id, Empresa dato){
+        Response response = new Response();
+        if(id<=0){
+            response.setCode(500);
+            response.setMessage("Error, el Id del usuario no es valido");
+            return response;
+        }
+        Empresa existe = selectEmpresatById(id);
+        if(existe == null){
+            response.setCode(500);
+            response.setMessage("Error, el usuario no existe en la base de datos");
+            return response;
+        }
+        existe.setNombre(dato.getNombre());
+        existe.setDireccion(dato.getDireccion());
+        existe.setDocumento(dato.getDocumento());
+        this.empresaRepository.save(existe);
+        response.setCode(200);
+        response.setMessage("Usuario modificado exitosamente");
+
+        return response;
     }
 
 }

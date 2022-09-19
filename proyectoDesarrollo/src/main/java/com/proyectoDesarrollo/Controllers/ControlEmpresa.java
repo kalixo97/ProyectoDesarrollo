@@ -2,6 +2,7 @@ package com.proyectoDesarrollo.Controllers;
 
 import com.proyectoDesarrollo.Entities.Empresa;
 import com.proyectoDesarrollo.Entities.MovimientoDinero;
+import com.proyectoDesarrollo.Entities.Usuario;
 import com.proyectoDesarrollo.Services.Response;
 import com.proyectoDesarrollo.Services.ServiceEmpresa;;
 import org.springframework.web.bind.annotation.*;
@@ -51,10 +52,12 @@ public class ControlEmpresa {
     }
 
     //HASTA ACA SE TIENE QUE ENVIAR UN ID EN EL POSRTMAN
-    @PatchMapping("enterprise")
-    public Response updateEmpresa(@RequestBody Empresa request){
 
-        return this.empresaServicio.updateEmpresa(request);
+    @PatchMapping("enterprise/{id}")
+    public Response updateEmpresaById(@PathVariable int id, @RequestBody Empresa request){
+
+
+        return this.empresaServicio.updateEmpresaById(id, request);
 
     }
 
